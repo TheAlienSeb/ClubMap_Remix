@@ -1,26 +1,450 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* All Black Color Palette */
+    --black: 0 0% 0%;              /* Pure black */
+    --dark-gray: 0 0% 5%;          /* Very dark gray */
+    --medium-gray: 0 0% 10%;       /* Medium dark gray */
+    --light-gray: 0 0% 15%;        /* Lighter gray for contrast */
+    --text-gray: 0 0% 85%;         /* Light gray for text */
+    --white: 0 0% 100%;            /* Pure white for contrast */
+
+    /* Primary Colors - All black variations */
+    --primary: 0 0% 0%;            /* Pure black */
+    --primary-dark: 0 0% 0%;       /* Pure black (same) */
+    --primary-light: 0 0% 5%;      /* Very dark gray */
+    --primary-foreground: 0 0% 85%; /* Light gray text on black */
+
+    /* Secondary Colors - Dark grays */
+    --secondary: 0 0% 10%;         /* Dark gray */
+    --secondary-dark: 0 0% 5%;     /* Darker gray */
+    --secondary-light: 0 0% 15%;   /* Lighter gray */
+    --secondary-foreground: 0 0% 85%; /* Light gray text */
+
+    /* Accent Colors - Subtle grays */
+    --success: 0 0% 20%;           /* Dark gray for success */
+    --success-light: 0 0% 25%;     /* Slightly lighter */
+    --success-foreground: 0 0% 85%;
+
+    --warning: 0 0% 15%;           /* Dark gray for warning */
+    --warning-light: 0 0% 20%;     /* Slightly lighter */
+    --warning-foreground: 0 0% 85%;
+
+    --destructive: 0 0% 8%;        /* Very dark gray for destructive */
+    --destructive-light: 0 0% 12%; /* Slightly lighter */
+    --destructive-foreground: 0 0% 85%;
+
+    /* Neutral Colors for UI - All black theme */
+    --background: 0 0% 0%;         /* Pure black background */
+    --foreground: 0 0% 85%;        /* Light gray text */
+    
+    --card: 0 0% 3%;               /* Very dark card background */
+    --card-foreground: 0 0% 85%;   /* Light gray text on cards */
+    
+    --popover: 0 0% 5%;            /* Dark popover backgrounds */
+    --popover-foreground: 0 0% 85%;
+    
+    --muted: 0 0% 8%;              /* Dark muted backgrounds */
+    --muted-foreground: 0 0% 60%;  /* Medium gray muted text */
+    
+    --accent: 0 0% 12%;            /* Dark accent backgrounds */
+    --accent-foreground: 0 0% 85%; /* Light gray accent text */
+    
+    --border: 0 0% 15%;            /* Dark gray borders */
+    --input: 0 0% 15%;             /* Dark input borders */
+    --ring: 0 0% 20%;              /* Gray focus rings */
+
+    /* Map-specific Colors - All black variations */
+    --map-overlay: 0 0% 0% / 0.8;  /* Black overlay */
+    --map-pin-active: 0 0% 25%;    /* Active event pin */
+    --map-pin-inactive: 0 0% 15%;  /* Regular event pin */
+    --map-pin-user: 0 0% 20%;      /* User location pin */
+    
+    /* Event Status Colors - Black variations */
+    --event-live: 0 0% 20%;        /* Live events */
+    --event-upcoming: 0 0% 15%;    /* Upcoming events */
+    --event-past: 0 0% 10%;        /* Past events */
+    --event-featured: 0 0% 25%;    /* Featured events */
+
+    /* User Type Colors - Black variations */
+    --user-student: 0 0% 18%;      /* Student user type */
+    --user-organizer: 0 0% 22%;    /* Organizer user type */
+
+    /* Radius for consistent rounded corners */
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark mode is the same as regular mode in all-black theme */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 85%;
+    
+    --card: 0 0% 3%;
+    --card-foreground: 0 0% 85%;
+    
+    --popover: 0 0% 5%;
+    --popover-foreground: 0 0% 85%;
+    
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 85%;
+    
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 85%;
+    
+    --muted: 0 0% 8%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 85%;
+    
+    --destructive: 0 0% 8%;
+    --destructive-foreground: 0 0% 85%;
+    
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 0 0% 20%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    @apply border-[hsl(var(--border))];
+  }
+  
+  body {
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))];
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* Component-specific utility classes */
+@layer components {
+  /* Custom Background Utilities - All black variations */
+  .bg-black {
+    @apply bg-[hsl(var(--black))];
+  }
+  
+  .bg-dark-gray {
+    @apply bg-[hsl(var(--dark-gray))];
+  }
+  
+  .bg-medium-gray {
+    @apply bg-[hsl(var(--medium-gray))];
+  }
+  
+  .bg-light-gray {
+    @apply bg-[hsl(var(--light-gray))];
+  }
+  
+  .bg-card {
+    @apply bg-[hsl(var(--card))];
+  }
+  
+  .bg-muted {
+    @apply bg-[hsl(var(--muted))];
+  }
+  
+  .bg-accent {
+    @apply bg-[hsl(var(--accent))];
+  }
+  
+  .bg-primary {
+    @apply bg-[hsl(var(--primary))];
+  }
+  
+  .bg-secondary {
+    @apply bg-[hsl(var(--secondary))];
+  }
+
+  /* Custom Text Utilities - Black theme text colors */
+  .text-black {
+    @apply text-[hsl(var(--black))];
+  }
+  
+  .text-dark-gray {
+    @apply text-[hsl(var(--dark-gray))];
+  }
+  
+  .text-medium-gray {
+    @apply text-[hsl(var(--medium-gray))];
+  }
+  
+  .text-light-gray {
+    @apply text-[hsl(var(--light-gray))];
+  }
+  
+  .text-text-gray {
+    @apply text-[hsl(var(--text-gray))];
+  }
+  
+  .text-card-foreground {
+    @apply text-[hsl(var(--card-foreground))];
+  }
+  
+  .text-muted-foreground {
+    @apply text-[hsl(var(--muted-foreground))];
+  }
+  
+  .text-accent-foreground {
+    @apply text-[hsl(var(--accent-foreground))];
+  }
+  
+  .text-primary-foreground {
+    @apply text-[hsl(var(--primary-foreground))];
+  }
+  
+  .text-secondary-foreground {
+    @apply text-[hsl(var(--secondary-foreground))];
+  }
+  
+  .text-foreground {
+    @apply text-[hsl(var(--foreground))];
+  }
+
+  /* Custom Border Utilities - Black theme borders */
+  .border-black {
+    @apply border-[hsl(var(--black))];
+  }
+  
+  .border-dark-gray {
+    @apply border-[hsl(var(--dark-gray))];
+  }
+  
+  .border-medium-gray {
+    @apply border-[hsl(var(--medium-gray))];
+  }
+  
+  .border-light-gray {
+    @apply border-[hsl(var(--light-gray))];
+  }
+  
+  .border-custom {
+    @apply border-[hsl(var(--border))];
+  }
+
+  /* Map Container - Black theme */
+  .map-container {
+    @apply w-full relative min-h-screen bg-muted rounded-lg overflow-hidden;
+  }
+
+
+/* My events page category selecton */
+  .tab-button {
+    @apply relative transition-all duration-200 ease-in-out text-white-100;
+  }
+  /* Event Pin Styles - Black theme */
+  .event-pin {
+    @apply absolute z-10 cursor-pointer transition-transform hover:scale-110;
+  }
+  
+  .event-pin-active {
+    @apply text-[hsl(var(--success))];
+  }
+  
+  .event-pin-upcoming {
+    @apply text-[hsl(var(--primary))];
+  }
+  
+  .event-pin-featured {
+    @apply text-[hsl(var(--warning))];
+  }
+
+  /* Event Cards - Black theme */
+  .event-card {
+    @apply bg-card flex flex-col justify-center hover:-translate-y-1 transition-all duration-300 ease-in-out border border-[hsl(var(--border))] rounded-lg p-4 shadow-sm hover:shadow-md cursor-pointer;
+  }
+  
+  .event-card-live {
+    @apply border-l-4 border-l-[hsl(var(--success))];
+  }
+  
+  .event-card-featured {
+    @apply border-l-4 border-l-[hsl(var(--warning))];
+  }
+
+  /* User Type Badges - Black theme */
+  .badge-student {
+    @apply bg-[hsl(var(--primary))]/20 text-[hsl(var(--text-gray))] border border-[hsl(var(--primary))]/30 px-2 py-1 rounded-full text-xs font-medium;
+  }
+  
+  .badge-organizer {
+    @apply bg-[hsl(var(--secondary))]/20 text-[hsl(var(--text-gray))] border border-[hsl(var(--secondary))]/30 px-2 py-1 rounded-full text-xs font-medium;
+  }
+
+  /* Dashboard Sidebar - Black theme */
+  .sidebar {
+    @apply bg-card border-r border-[hsl(var(--border))] h-full w-64 fixed left-0 top-0 z-40;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 rounded-lg mx-2 transition-colors hover:text-blue-500 cursor-pointer;
+  }
+  
+  .sidebar-item-active {
+    @apply bg-primary text-primary-foreground hover:bg-[hsl(var(--primary-light))];
+  }
+
+  /* Toast/Notification Styles - Black theme */
+  .toast-success {
+    @apply bg-[hsl(var(--success))] text-[hsl(var(--success-foreground))];
+  }
+  
+  .toast-error {
+    @apply bg-[hsl(var(--destructive))] text-[hsl(var(--destructive-foreground))];
+  }
+  
+  .toast-warning {
+    @apply bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))];
+  }
+
+  /* Form Elements - Black theme */
+  .form-section {
+    @apply space-y-4 p-6 bg-card rounded-lg border border-[hsl(var(--border))];
+  }
+  
+  .input-group {
+    @apply space-y-2;
+  }
+  
+  .input-label {
+    @apply text-sm font-medium text-foreground;
+  }
+
+  /* Button Variants - Black theme */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-[hsl(var(--primary-light))] px-4 py-2 rounded-md font-medium transition-colors border border-[hsl(var(--border))];
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-[hsl(var(--secondary-light))] px-4 py-2 rounded-md font-medium transition-colors border border-[hsl(var(--border))];
+  }
+  
+  .btn-outline {
+    @apply border border-[hsl(var(--border))] bg-[hsl(var(--background))] hover:bg-accent text-foreground px-4 py-2 rounded-md font-medium transition-colors;
+  }
+  
+  .btn-ghost {
+    @apply hover:bg-accent text-foreground px-4 py-2 rounded-md font-medium transition-colors;
+  }
+
+  /* Status Indicators - Black theme */
+  .status-online {
+    @apply w-2 h-2 bg-[hsl(var(--success))] rounded-full;
+  }
+  
+  .status-offline {
+    @apply w-2 h-2 bg-[hsl(var(--muted-foreground))] rounded-full;
+  }
+  
+  .status-busy {
+    @apply w-2 h-2 bg-[hsl(var(--warning))] rounded-full;
+  }
+
+  /* Event Status Pills - Black theme */
+  .event-status-live {
+    @apply bg-[hsl(var(--success))]/20 text-[hsl(var(--text-gray))] px-2 py-1 rounded-full text-xs font-medium border border-[hsl(var(--success))]/30;
+  }
+  
+  .event-status-upcoming {
+    @apply bg-[hsl(var(--primary))]/20 text-[hsl(var(--text-gray))] px-2 py-1 rounded-full text-xs font-medium border border-[hsl(var(--primary))]/30;
+  }
+  
+  .event-status-ended {
+    @apply bg-[hsl(var(--muted))]/50 text-[hsl(var(--muted-foreground))] px-2 py-1 rounded-full text-xs font-medium border border-[hsl(var(--muted))]/50;
+  }
+
+  .event-status-featured {
+    @apply bg-[hsl(var(--warning))]/20 text-[hsl(var(--text-gray))] px-2 py-1 rounded-full text-xs font-medium border border-[hsl(var(--warning))]/30;
+  }
+
+  /* Chat Components - Black theme */
+  .chat-message {
+    @apply p-3 rounded-lg max-w-xs border border-[hsl(var(--border))];
+  }
+  
+  .chat-message-sent {
+    @apply bg-primary text-primary-foreground ml-auto;
+  }
+  
+  .chat-message-received {
+    @apply bg-muted text-foreground mr-auto;
+  }
+
+  /* Loading States - Black theme */
+  .loading-skeleton {
+    @apply animate-pulse bg-muted rounded;
+  }
+  
+  .loading-spinner {
+    @apply animate-spin rounded-full border-2 border-muted border-t-[hsl(var(--text-gray))];
+  }
+
+  /* Responsive Utilities */
+  .container-responsive {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .grid-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4;
+  }
+}
+
+/* Animation Utilities */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-only {
+    display: block !important;
+  }
 }
