@@ -1,171 +1,99 @@
-"use client"
-import React from 'react'
-import { useState } from 'react'
-import MyEventsEventDisplay from './MyEventsEventDisplay'
-const MyEvents = () => {
-  console.log('MyEvents component is rendering!')
-
-  const [whichEvent,setWhichEvent] = useState('YourEvents')
-
-  const events = [{
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-  {
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-  {
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-  {
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-  {
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-  {
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-  {
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-  {
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-  {
-    _dayOfEvent: new Date(),
-    rsvp: 100,
-    organizer: {
-                _id: 1,
-                name: "TSA"
-    },
-    _id:1,
-    description: "Knot making arts and crafts and Hang out and chill",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQC1mSGEwwsVbbaLHKTPydNWwTRyjR_KdZqgw&s",
-    category: "Hangout/Chill",
-    eventTitle: "Knot Making hangout"
-  },
-];
-
-
-
+"use client";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { CalendarCheck, LoaderCircle, MapPin, Search } from "lucide-react";
+type Event = {
+  id: string;
+  title: string;
+  startsAt: string;
+  location: string;
+  visibility: string;
+  image: string;
+  organizerName: string;
+  isRsvped: boolean;
+};
+export default function MyEvents() {
+  const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
+  useEffect(() => {
+    fetch("/api/events")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((all) => setEvents(all.filter((event: Event) => event.isRsvped)))
+      .finally(() => setLoading(false));
+  }, []);
+  const mine = events.filter((event) =>
+    event.title.toLowerCase().includes(query.toLowerCase()),
+  );
   return (
-    <div className=" bg-dark-gray min-h-screen">
-        <nav className="ml-5 pt-3 relative mb-28">  {/* Add relative positioning */}
-        <div className="flex gap-3 relative">
-            <button className={`tab-button ${whichEvent === 'YourEvents' ? 'active' : ''}`}
-                    onClick={() => setWhichEvent('YourEvents')}
-            >
-                Your Events
-            </button>
-                <span className="text-white-100"> | </span>
-            <button 
-              className={`tab-button ${whichEvent === 'PastEvents' ? 'active' : ''}`}
-              onClick={() => setWhichEvent('PastEvents')}
-            >
-                Past Events
-            </button>
-        <div 
-            className={`absolute bottom-0 h-0.5 bg-white transition-all duration-300 ease-in-out ${
-                whichEvent === 'YourEvents' 
-                ? 'left-0 w-[87px]' 
-                : 'left-[110px] w-[90px]' 
-                }`}
+    <div className="content-page">
+      <header className="content-header">
+        <div>
+          <p>YOUR CALENDAR</p>
+          <h1>My events</h1>
+          <span>Everything you’ve said yes to, all in one place.</span>
+        </div>
+        <label className="mini-search">
+          <Search />
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search your events"
           />
-          </div>
-        </nav>
-          <div className=' px-5 grid md:grid-cols-4 sm:grid-cols-2 gap-5'>
-            {
-              events?.length > 0 ? (
-                events.map( (event: EventType, index:number) => (
-                  <MyEventsEventDisplay key={event?._id} event={event}/>
-                ))
-              ) : (
-                <p className='text-sm font-normal text-white-100'>No Events RSVP'd</p>
-              )} 
-          </div>
-
+        </label>
+      </header>
+      {loading ? (
+        <div className="large-empty">
+          <LoaderCircle className="spin" />
+        </div>
+      ) : mine.length ? (
+        <div className="event-grid">
+          {mine.map((event) => (
+            <Link
+              href={`/events/${event.id}`}
+              className="event-tile"
+              key={event.id}
+            >
+              <div
+                className="tile-image"
+                style={{
+                  backgroundImage: `linear-gradient(180deg,transparent,rgba(0,0,0,.9)),url(${event.image})`,
+                }}
+              >
+                <span>{event.visibility}</span>
+                <div>
+                  <p>{event.organizerName}</p>
+                  <h2>{event.title}</h2>
+                </div>
+              </div>
+              <div className="tile-details">
+                <span>
+                  <CalendarCheck />
+                  {new Date(event.startsAt).toLocaleString("en-US", {
+                    weekday: "short",
+                    month: "short",
+                    day: "numeric",
+                    hour: "numeric",
+                  })}
+                </span>
+                <span>
+                  <MapPin />
+                  {event.location}
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <div className="large-empty">
+          <CalendarCheck />
+          <h2>Your calendar is wide open</h2>
+          <p>RSVP to an event and it will appear here.</p>
+          <Link href="/user/me/MyMap" className="primary-button">
+            Explore the map
+          </Link>
+        </div>
+      )}
     </div>
-  )
+  );
 }
-
-export default MyEvents

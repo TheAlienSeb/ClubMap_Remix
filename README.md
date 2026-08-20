@@ -1,10 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ClubMap
+
+A map-centered campus events platform built with Next.js, Mapbox, NextAuth,
+PostgreSQL/Drizzle, and Supabase Storage.
 
 ## Getting Started
 
-First, run the development server:
+Copy `.env.example` to `.env.local`, provide valid credentials, and create a
+public Supabase Storage bucket named `event-media`. The email configured as
+`CLUBMAP_BOOTSTRAP_ADMIN_EMAIL` becomes the first administrator when registered.
+
+Development uses the file-backed local store automatically, with no migration
+required. Run `npm run dev` and use the test accounts below; local events,
+RSVPs, chats, and messages persist in `.clubmap/local-data.json`. Set
+`CLUBMAP_LOCAL_MODE=false` to test against PostgreSQL instead.
+
+Apply the database schema and start the development server:
 
 ```bash
+npm run migrate
 npm run dev
 # or
 yarn dev
@@ -14,7 +27,21 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Student login is at `/login`; organizer and administrator login is at
+`/admin/login`.
+
+## Development test accounts
+
+After applying migrations, seed the development-only accounts with:
+
+```bash
+npm run seed:test-users
+```
+
+- Admin: `admin@clubmap.test` / `Admin123!`
+- Student: `student@clubmap.test` / `Student123!`
+
+The seed command refuses to run when `NODE_ENV=production`.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

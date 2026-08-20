@@ -1,7 +1,6 @@
+import { useQRCode } from "next-qrcode";
 
-import { useQRCode } from 'next-qrcode';
-
-function QR({ text }: {text:string}) {
+function QR({ text, size = 280 }: { text: string; size?: number }) {
   const { SVG } = useQRCode();
 
   return (
@@ -9,10 +8,10 @@ function QR({ text }: {text:string}) {
       text={text}
       options={{
         margin: 2,
-        width: 375,
+        width: size,
         color: {
-          dark: '#010599FF',
-          light: '#FFFFFFFF',
+          dark: "#050505FF",
+          light: "#FFFFFFFF",
         },
       }}
     />

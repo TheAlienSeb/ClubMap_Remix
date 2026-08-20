@@ -1,12 +1,13 @@
-import EventPage from '@/app/components/EventPage'
-import React from 'react'
+import EventPage from "@/app/components/EventPage";
+import React from "react";
 
-const page = () => {
+const page = async ({ params }: { params: Promise<{ eventID: string }> }) => {
+  const { eventID } = await params;
   return (
     <div>
-      <EventPage />
+      <EventPage eventId={eventID} />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

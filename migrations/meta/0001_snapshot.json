@@ -84,12 +84,8 @@
           "name": "events_organizer_id_organizers_user_id_fk",
           "tableFrom": "events",
           "tableTo": "organizers",
-          "columnsFrom": [
-            "organizer_id"
-          ],
-          "columnsTo": [
-            "user_id"
-          ],
+          "columnsFrom": ["organizer_id"],
+          "columnsTo": ["user_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -130,12 +126,8 @@
           "name": "group_chats_event_id_events_event_id_fk",
           "tableFrom": "group_chats",
           "tableTo": "events",
-          "columnsFrom": [
-            "event_id"
-          ],
-          "columnsTo": [
-            "event_id"
-          ],
+          "columnsFrom": ["event_id"],
+          "columnsTo": ["event_id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -145,9 +137,7 @@
         "group_chats_event_id_unique": {
           "name": "group_chats_event_id_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "event_id"
-          ]
+          "columns": ["event_id"]
         }
       },
       "policies": {},
@@ -195,12 +185,8 @@
           "name": "messages_chat_id_group_chats_id_fk",
           "tableFrom": "messages",
           "tableTo": "group_chats",
-          "columnsFrom": [
-            "chat_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["chat_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -208,12 +194,8 @@
           "name": "messages_sender_id_users_id_fk",
           "tableFrom": "messages",
           "tableTo": "users",
-          "columnsFrom": [
-            "sender_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["sender_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -259,12 +241,8 @@
           "name": "organizers_user_id_users_id_fk",
           "tableFrom": "organizers",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -359,12 +337,7 @@
     "public.roles": {
       "name": "roles",
       "schema": "public",
-      "values": [
-        "guest",
-        "user",
-        "organizer",
-        "admin"
-      ]
+      "values": ["guest", "user", "organizer", "admin"]
     }
   },
   "schemas": {},
