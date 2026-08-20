@@ -22,6 +22,9 @@ the map serving as the primary discovery surface instead of a secondary panel.
 - Automatic map bounds based on the currently visible events
 - Loading, empty, configuration, and map-error states
 
+<img width="1511" height="848" alt="image" src="https://github.com/user-attachments/assets/6c9c74d3-a807-4215-aeeb-643323498d45" />
+
+
 ### Events and organizations
 
 - Standalone event detail pages
@@ -32,6 +35,7 @@ the map serving as the primary discovery surface instead of a secondary panel.
 - Database-backed **My Events** calendar
 - Organizer event publishing with coordinates and Supabase media uploads
 - Automatic group-chat creation when an event is published
+<img width="1247" height="781" alt="image" src="https://github.com/user-attachments/assets/c596a34b-3090-4014-970c-7c018056596e" />
 
 ### Authentication and authorization
 
@@ -55,6 +59,9 @@ the map serving as the primary discovery surface instead of a secondary panel.
 - Real loading, empty, access-denied, and error states
 - 2,000-character server-side message limit
 
+<img width="1227" height="743" alt="image" src="https://github.com/user-attachments/assets/345c1c07-7496-486c-a271-65f69ac4800f" />
+
+
 ### Digital campus pass
 
 - Modern responsive QR pass interface
@@ -63,6 +70,8 @@ the map serving as the primary discovery surface instead of a secondary panel.
 - Manual pass refresh
 - User identity and university-verification display
 - Step-by-step event check-in instructions
+
+<img width="869" height="745" alt="image" src="https://github.com/user-attachments/assets/86aa4a60-473c-4bea-8cb4-0ae786d95425" />
 
 ### Organizer and administrator tools
 
@@ -73,6 +82,8 @@ the map serving as the primary discovery surface instead of a secondary panel.
 - Supabase Storage uploads in database-backed environments
 - Organizer records and event-chat creation handled automatically
 - Administrative overview and moderation-ready role infrastructure
+
+
 
 ## Technology
 
